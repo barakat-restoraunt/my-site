@@ -1,0 +1,718 @@
+/* ===== CSS Variables ===== */
+:root {
+    --color-bg: #0d0d0d;
+    --color-bg-secondary: #1a1a1a;
+    --color-bg-card: #1e1e1e;
+    --color-bg-card-hover: #252525;
+    --color-accent: #d4af37;
+    --color-accent-hover: #e8c84a;
+    --color-accent-glow: rgba(212, 175, 55, 0.3);
+    --color-text: #ffffff;
+    --color-text-secondary: #b0b0b0;
+    --color-text-muted: #999999;
+    --color-border: #333333;
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Cormorant Garamond', Georgia, serif;
+    --transition: 0.3s ease;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 30px rgba(212, 175, 55, 0.15);
+    --radius: 12px;
+    --radius-sm: 8px;
+}
+
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Узбекский орнамент на фоне */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://i.pinimg.com/736x/17/6f/9d/176f9dbd32a5113dd0601e7153728a43.jpg');
+    background-repeat: repeat-x;
+    background-size: auto 100vh;
+    background-position: center;
+    opacity: 0.03;
+    z-index: -1;
+    pointer-events: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+/* ===== Header ===== */
+.header {
+    text-align: center;
+    padding: 0;
+    background: url('https://raw.githubusercontent.com/barakat-restoraunt/my-site/main/%D1%88%D0%B0%D0%BF%D0%BA%D0%B0%20%D0%B1%D0%B0%D1%80%D0%B0%D0%BA%D0%B0%D1%82.jpg') no-repeat center center;
+    background-size: cover;
+    background-color: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    image-rendering: high-quality;
+}
+}
+
+.header h1 {
+    font-size: 5rem;
+    font-weight: 600;
+    color: transparent;
+    letter-spacing: 20px;
+    text-shadow: none;
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    opacity: 0;
+}
+
+.divider {
+    display: none;
+}
+
+/* ===== Navigation ===== */
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+}
+
+.nav a {
+    color: var(--color-text-secondary);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: var(--transition);
+}
+
+.nav a:hover {
+    color: var(--color-accent);
+}
+
+.nav a:hover::after {
+    width: 80%;
+}
+
+/* ===== Dropdown ===== */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown__toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-dropdown__arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown__arrow,
+.nav-dropdown.active .nav-dropdown__arrow {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(13, 13, 13, 0.98);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    min-width: 200px;
+    padding: 10px 0;
+    z-index: 200;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.nav-dropdown.active .nav-dropdown__menu {
+    display: block;
+}
+
+.nav-dropdown__menu a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-align: center;
+    border-radius: 0;
+    white-space: nowrap;
+}
+
+.nav-dropdown__menu a::after {
+    display: none;
+}
+
+.nav-dropdown__menu a:hover {
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--color-accent);
+}
+
+/* ===== Main Content ===== */
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* ===== Section Styles ===== */
+.section {
+    margin-bottom: 80px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-label {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+}
+
+.section h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+.section-line {
+    width: 100px;
+    height: 2px;
+    margin: 15px auto 0;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+}
+
+/* ===== Grid Layout ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+/* ===== Card Styles ===== */
+.card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-accent);
+}
+
+.photo {
+    width: 100%;
+    height: 220px;
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .photo img {
+    transform: scale(1);
+}
+
+.info {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    flex: 1;
+}
+
+.text {
+    flex: 1;
+}
+
+.name {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    display: block;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.desc {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
+.price {
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ===== Footer ===== */
+.footer {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4af37' stroke-width='1.5'%3E%3Cpath d='M40 10 L55 25 L40 40 L25 25Z'/%3E%3Ccircle cx='40' cy='25' r='10'/%3E%3Ccircle cx='40' cy='25' r='5'/%3E%3Ccircle cx='40' cy='25' r='2'/%3E%3Cpath d='M40 40 L40 70'/%3E%3Cpath d='M35 55 L40 45 L45 55'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    top: -40px;
+}
+
+.footer h3 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 15px;
+    margin-bottom: 25px;
+    padding-top: 30px;
+}
+
+.footer p {
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.footer .phone {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* ===== QR Block ===== */
+.qr-block {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.qr-block__text {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.qr-block__img {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    border: 2px solid var(--color-border);
+    transition: border-color 0.3s;
+}
+
+.qr-block__img:hover {
+    border-color: var(--color-accent);
+}
+
+/* ===== Menu Category ===== */
+.menu-category {
+    margin-bottom: 60px;
+}
+
+.menu-category__title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+/* ===== About Section ===== */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-content p {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.about-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.about-stat {
+    text-align: center;
+}
+
+.about-stat__number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+}
+
+.about-stat__text {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
+/* ===== Delivery Section ===== */
+.delivery-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.delivery-card {
+    background: var(--color-bg-card);
+    padding: 40px 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    border: 1px solid var(--color-border);
+    transition: var(--transition);
+}
+
+.delivery-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-hover);
+}
+
+.delivery-card__icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.delivery-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: var(--color-text);
+}
+
+.delivery-card__text {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* ===== Reviews Section ===== */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.review-card {
+    background: var(--color-bg-card);
+    padding: 35px 30px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    transition: var(--transition);
+}
+
+.review-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-hover);
+}
+
+.review-card__text {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.review-card__author {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-accent);
+}
+
+/* ===== Contacts Section ===== */
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.contact-card {
+    background: var(--color-bg-card);
+    padding: 35px 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    border: 1px solid var(--color-border);
+    transition: var(--transition);
+}
+
+.contact-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-hover);
+}
+
+.contact-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+}
+
+.contact-card__text {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+}
+
+.contact-card__link {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.contact-card__link:hover {
+    text-decoration: underline;
+}
+
+/* ===== Scroll Animations ===== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .delivery-info,
+    .reviews-grid,
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-stats {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 700px) {
+    .header {
+        min-height: 250px;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+        letter-spacing: 12px;
+    }
+
+    .nav {
+        gap: 5px;
+        padding: 15px;
+    }
+
+    .nav a {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+        letter-spacing: 1px;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+        letter-spacing: 5px;
+    }
+
+    .section-header {
+        margin-bottom: 30px;
+    }
+
+    .info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .price {
+        align-self: flex-start;
+    }
+
+    .footer h3 {
+        font-size: 1.5rem;
+        letter-spacing: 10px;
+    }
+}
+
+/* ===== Lightbox ===== */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox__content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    z-index: 1;
+}
+
+.lightbox__img {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transition: transform 0.15s ease;
+}
+
+.lightbox__close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    font-size: 2.5rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lightbox__close:hover {
+    color: var(--color-accent);
+}
+
+/* Photo clickable */
+.photo img[src] {
+    cursor: pointer;
+}
