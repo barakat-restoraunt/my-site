@@ -71,4 +71,31 @@ var observerOptions = {
 
 var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-        if
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.card').forEach(function(card) {
+    card.classList.add('animate-on-scroll');
+    observer.observe(card);
+});
+
+document.querySelectorAll('.section-header').forEach(function(header) {
+    header.classList.add('animate-on-scroll');
+    observer.observe(header);
+});
+
+// If page loads already scrolled (fast jump) — show everything immediately
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+            var rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight + 100) {
+                el.classList.add('animated');
+            }
+        });
+    }, 100);
+});
