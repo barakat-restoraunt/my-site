@@ -65,25 +65,10 @@ document.addEventListener('keydown', function(e) {
 
 // Scroll animations for cards
 var observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.05,
+    rootMargin: '50px 0px 50px 0px'
 };
 
 var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animated');
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.card').forEach(function(card, index) {
-    card.classList.add('animate-on-scroll');
-    card.style.transitionDelay = (index * 0.05) + 's';
-    observer.observe(card);
-});
-
-document.querySelectorAll('.section-header').forEach(function(header) {
-    header.classList.add('animate-on-scroll');
-    observer.observe(header);
-});
+        if
